@@ -1,0 +1,41 @@
+{
+  "artist": "Toxic O",
+  "tracks": [
+    {
+      "id": "behind-ya-face",
+      "title": "Behind ya face ft 8teen",
+      "type": "Single",
+      "year": "2024",
+      "duration": "03:26",
+      "artwork": "Behind ya face",
+      "artworkClass": "artwork-cyan",
+      "audio": "Folder/OtengSelekwemusic/Behind Ya.flac",
+      "listenUrl": "https://music.youtube.com/channel/UCuZ2ZosDXHDwUJNglPF_jNQ?si=jFqFC8Vw8on1MBIM",
+      "download": "Folder/OtengSelekwemusic/Behind Ya.flac"
+    },
+    {
+      "id": "addictions",
+      "title": "Addictions ft 8teen",
+      "type": "Single",
+      "year": "2024",
+      "duration": "02:16",
+      "artwork": "Addictions",
+      "artworkClass": "artwork-pink",
+      "audio": "Folder/OtengSelekwemusic/Toxic Addictions.flac",
+      "listenUrl": "https://music.youtube.com/watch?v=HfP0GmVz8uM&si=nJ-uQJmP26qtRrEH",
+      "download": "Folder/OtengSelekwemusic/Toxic Addictions.flac"
+    },
+    {
+      "id": "loss",
+      "title": "Toxic O - Loss",
+      "type": "Album",
+      "year": "2025",
+      "duration": "03:48",
+      "artwork": "Loss",
+      "artworkClass": "artwork-green",
+      "audio": "Folder/OtengSelekwemusic/Loss.flac",
+      "listenUrl": "https://music.youtube.com/channel/UCuZ2ZosDXHDwUJNglPF_jNQ",
+      "download": "Folder/OtengSelekwemusic/Loss.flac"
+    }
+  ]
+}

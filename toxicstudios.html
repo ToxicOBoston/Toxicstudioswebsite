@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Toxicstudios-Official Website </title>
+    <meta name="description" content="Music, Tour dates, Merch and contact."/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+
+        :root{
+            --bg:#0f0f12; --card:#0a0a0a; --accent:#26454b; --muted:#eef0f3; --glass: rgba(21, 58, 70, 0.04);
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        html,body{height:100%;margin:0;background:#11151d;color:#e7e3e3}
+        body{position:relative;overflow-x:hidden;background:radial-gradient(circle at 78% 8%,rgba(42,163,194,.18),transparent 26rem),linear-gradient(180deg,#12151b 0%,#202739 52%,#10151d 100%)}
+        body::before,body::after{content:"";position:fixed;z-index:-1;width:28rem;height:28rem;border-radius:50%;filter:blur(70px);opacity:.18;pointer-events:none}
+        body::before{top:18%;left:-18rem;background:#1b9ab5;animation:ambient-drift 14s ease-in-out infinite alternate}
+        body::after{right:-18rem;bottom:4%;background:#b43d72;animation:ambient-drift 18s ease-in-out -4s infinite alternate-reverse}
+        a{color:var(--accent);text-decoration:none}
+        header{position:sticky;top:0;backdrop-filter:blur(7px);background:linear-gradient(180deg,rgba(11,12,16,.6),rgba(11,12,16,.35));border-bottom:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;z-index:20}
+        .brand{display:flex;gap:12px;align-items:center;font-weight:700}
+        .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#ff6f91);display:flex;align-items:center;justify-content:center;font-weight:800}
+        nav{display:flex;gap:14px;align-items:center}
+        nav a{position:relative;color:#dce7ec;transition:color .2s ease}
+        nav a:not(.cta)::after{content:"";position:absolute;left:10px;right:10px;bottom:-7px;height:2px;background:#7ee8ff;transform:scaleX(0);transform-origin:center;transition:transform .2s ease}
+        nav a:not(.cta):hover,nav a.active{color:#7ee8ff}
+        nav a:not(.cta):hover::after,nav a.active::after{transform:scaleX(1)}
+        .cta{background:var(--accent);padding:8px 12px;border-radius:8px;font-weight:600;color:#fff}
+        .container{max-width:1100px;margin:0 auto;padding:28px 20px;}
+        .hero{display:grid;grid-template-columns:2fr 380px;gap:28px;align-items:center;padding:48px 0;min-height:72vh}
+        .hero-left{position:relative}
+        .hero-left::before{content:"01 / SOUND IN MOTION";display:block;margin-bottom:18px;color:#7ee8ff;font-size:11px;letter-spacing:3px;opacity:.8}
+        .hero-left h1{font-size:40px;margin:0 0 16px;line-height:2.03;display:inline-block;animation:glow-slide 6s ease-in-out infinite}
+        .hero-left p{color:var(--muted);margin:0 0 18px}
+        .buttons{display:flex;gap:16px}
+        .btn{padding:10px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+        @keyframes glow-slide{
+            0%{transform:translateX(-12px);text-shadow:0 0 12px rgba(39, 91, 102, 0.12),0 0 18px rgba(255,255,255,0);color:#e7e3e3}
+            50%{transform:translateX(12px);text-shadow:0 0 12px rgba(38,69,75,0.28),0 0 30px rgba(18, 138, 161, 0.12);color:#0b2d77}
+            100%{transform:translateX(-12px);text-shadow:0 0 12px rgba(38,69,75,0.12),0 0 18px rgba(255,255,255,0);color:#443e3e}
+        }
+        .player{background:linear-gradient(180deg,#3c3c3f,#2aa3c2);padding:14px;border-radius:12px;border:2px solid rgba(22, 146, 146, 0.03)}
+        .cover{position:relative;width:100%;height:220px;border-radius:10px;background:radial-gradient(circle at 70% 20%,rgba(126,232,255,.5),transparent 20%),linear-gradient(135deg,#263d47,#151517 68%);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;overflow:hidden}
+        .cover::before{content:"";position:absolute;inset:20px;border:1px solid rgba(126,232,255,.35);transform:rotate(-8deg);animation:cover-orbit 8s linear infinite}
+        .cover::after{content:"TOXIC O / 2026";position:absolute;left:18px;bottom:16px;color:#7ee8ff;font-size:10px;letter-spacing:2px}
+        .cover-mark{font-size:32px;letter-spacing:8px;color:#f3fbff;text-shadow:0 0 22px rgba(126,232,255,.65);animation:cover-breathe 3s ease-in-out infinite}
+        section{margin:42px 0}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+        .card{background:rgba(10,10,10,.78);position:relative;padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+        .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.24)}
+        .track-card.is-playing{border-color:#2aa3c2;box-shadow:0 0 0 1px rgba(42,163,194,.35),0 18px 40px rgba(42,163,194,.16)}
+        .track-card.is-playing .artwork{animation:artwork-pulse 1.8s ease-in-out infinite}
+        .artwork{height:120px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;transition:transform .25s ease}
+        .artwork-cyan{background:linear-gradient(90deg,#24809c,#0c9138)}
+        .artwork-pink{background:linear-gradient(90deg,#8f1f6a,#404063)}
+        .artwork-green{background:linear-gradient(90deg,#303131,#205a4d)}
+        .track-progress{height:4px;margin-top:12px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.12)}
+        .track-progress span{display:block;width:0;height:100%;background:#7ee8ff;transition:width .2s linear}
+        .player.is-playing{animation:player-glow 2s ease-in-out infinite}
+        @keyframes artwork-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+        @keyframes player-glow{0%,100%{box-shadow:0 0 0 rgba(42,163,194,0)}50%{box-shadow:0 0 28px rgba(42,163,194,.26)}}
+        .card-badge{position:absolute;top:16px;right:16px;display:flex;gap:8px;}
+        .icon-btn{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff;text-decoration:none;font-size:14px;transition:transform .2s ease,background .2s ease}
+        .icon-btn:hover{transform:scale(1.05);background:rgba(255,255,255,0.16)}
+        .favorite-btn.is-favorite{color:#ff6f91;background:rgba(255,111,145,.18);transform:scale(1.08)}
+        .social-links{display:flex;align-items:center;gap:10px;margin-top:14px}
+        .social-link{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.12);border-radius:50%;background:rgba(255,255,255,.06);transition:transform .25s ease,background .25s ease,border-color .25s ease}
+        .social-link:hover{transform:translateY(-4px) scale(1.06);background:rgba(126,232,255,.16);border-color:rgba(126,232,255,.6)}
+        .social-link img{width:20px;height:20px;display:block}
+        .reveal{opacity:0;transform:translateY(24px);transition:opacity .15s ease,transform .15s cubic-bezier(.2,.7,.2,1)}
+        .reveal.is-visible{opacity:1;transform:translateY(0)}
+        .reveal-stagger > *{transition-delay:calc(var(--index, 0) * 300ms)}
+        .card-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;font-size:13px;color:var(--muted)}
+        .card-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+        .muted{color:var(--muted);font-size:14px}
+        .tour-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+        .tour-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(60, 8, 129, 0.02),transparent)}
+        footer{padding:28px 0;color:var(--muted);text-align:center;font-size:14px}
+        @keyframes ambient-drift{from{transform:translate3d(0,-20px,0) scale(.9)}to{transform:translate3d(80px,50px,0) scale(1.12)}}
+        @keyframes cover-orbit{to{transform:rotate(352deg)}}
+        @keyframes cover-breathe{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.06);opacity:1}}
+        @media (prefers-reduced-motion:reduce){
+            *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+            .reveal{opacity:1;transform:none}
+        }
+        /* Responsive */
+        @media (max-width:880px){
+            .hero{grid-template-columns:1fr;gap:20px}
+            .hero-left h1{font-size:28px}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <div class="" aria-hidden>OS Music </div>
+            <div>
+                <div style="font-weight:800">Toxic O</div>
+                <div style="font-size:12px;color:var(--muted)">Oteng Selekwe Music</div>
+            </div>
+        </div>
+        <nav>
+            <a href="#music">Music</a>
+            <a href="#tour">Tour</a>
+            <a href="#about">Profile</a>
+            <a href="#contact">Contact</a>
+            <a class="cta" href="#subscribe">Please Subscribe</a>
+        </nav>
+    </header>
+
+    <main class="container" role="main">
+        <section class="hero" aria-label="Hero">
+            <div class="hero-left">
+                <h1>Toxic O</h1>
+                <p class="player">Tracks include Checkmate,Dreams....</p>
+                <div class="buttons">
+                    
+                </div>
+            <div class="player card" id="playerCard" aria-label="Music player">
+                <div class="cover"><span class="cover-mark">TOXIC</span></div>
+                <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+                    <div style="flex:1">
+                        <div id="playerTitle" style="font-weight:700">Toxic O</div>
+                        <div id="playerTime" class="muted" style="font-size:13px">2026 • 02:10</div>
+                    </div>
+                    <div style="display:flex;gap:8px">
+                        <button class="btn" onclick="togglePlay()" id="playBtn">Play</button>
+                        <a class="btn" href="https://music.youtube.com/channel/UCuZ2ZosDXHDwUJNglPF_jNQ?si=TElhn47olfz72ZeU" onclick="alert('https://music.youtube.com/channel/UCuZ2ZosDXHDwUJNglPF_jNQ?si=TElhn47olfz72ZeU')">Listen</a>
+                    </div>
+                </div>
+                
+                <div class="track-progress" aria-hidden="true"><span id="playerProgress"></span></div>
+                <audio id="player-audio" src="Folder/OtengSelekwemusic/Behind Ya.flac" preload="metadata"></audio>
+            </div>
+        </section>
+
+        <section id="music">
+            <div style="display:flex;justify-content:space-between;align-items:end">
+                <h2 style="margin:0">Music</h2>
+                <div class="muted" style="font-size:16px"></div>
+            </div>
+
+            <section id="releases" aria-labelledby="releases-title" style="margin:18px 0 0">
+                <h3 id="releases-title">Latest releases</h3>
+                <div class="grid" style="margin-top:14px">
+                    <article class="card track-card" data-audio="Folder/OtengSelekwemusic/Behind Ya.flac" data-title="Behind ya face ft 8teen" data-year="2024" data-duration="03:26">
+                        <div class="card-badge"><button class="icon-btn favorite-btn" type="button" aria-label="Favorite Behind ya face">★</button><a class="icon-btn" href="Folder/OtengSelekwemusic/Behind Ya.flac" download aria-label="Download Behind ya face">⬇</a></div>
+                        <div class="artwork artwork-cyan">Behind ya face</div>
+                        <div style="margin-top:10px;font-weight:700">Behind ya face ft 8teen</div>
+                        <div class="card-meta"><span>Single • 2024</span><span>03:26</span></div>
+                        <div class="card-actions"><button class="btn track-play-btn" type="button">Play</button><a class="btn" href="https://music.youtube.com/channel/UCuZ2ZosDXHDwUJNglPF_jNQ?si=jFqFC8Vw8on1MBIM" target="_blank" rel="noreferrer">Listen</a></div>
+                    </article>
+                    <article class="card track-card" data-audio="Folder/OtengSelekwemusic/Toxic Addictions.flac" data-title="Addictions ft 8teen" data-year="2024" data-duration="02:16">
+                        <div class="card-badge"><button class="icon-btn favorite-btn" type="button" aria-label="Favorite Addictions">★</button><a class="icon-btn" href="Folder/OtengSelekwemusic/Toxic Addictions.flac" download aria-label="Download Addictions">⬇</a></div>
+                        <div class="artwork artwork-pink">Addictions</div>
+                        <div style="margin-top:10px;font-weight:700">Addictions ft 8teen</div>
+                        <div class="card-meta"><span>Single • 2024</span><span>02:16</span></div>
+                        <div class="card-actions"><button class="btn track-play-btn" type="button">Play</button><a class="btn" href="https://music.youtube.com/watch?v=HfP0GmVz8uM&amp;si=nJ-uQJmP26qtRrEH" target="_blank" rel="noreferrer">Listen</a></div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="archive" aria-labelledby="archive-title" style="margin:28px 0 0">
+                <h3 id="archive-title">Archive</h3>
+                <div class="grid" style="margin-top:14px">
+                    <article class="card track-card" data-audio="Folder/OtengSelekwemusic/Loss.flac" data-title="Toxic O - Loss" data-year="2025" data-duration="03:48">
+                        <div class="card-badge"><button class="icon-btn favorite-btn" type="button" aria-label="Favorite Loss">★</button><a class="icon-btn" href="Folder/OtengSelekwemusic/Loss.flac" download aria-label="Download Loss">⬇</a></div>
+                        <div class="artwork artwork-green">Loss</div>
+                        <div style="margin-top:10px;font-weight:700">Toxic O - Loss</div>
+                        <div class="card-meta"><span>Album • 2025</span><span>03:48</span></div>
+                        <div class="card-actions"><button class="btn track-play-btn" type="button">Play</button><a class="btn" href="https://music.youtube.com/channel/UCuZ2ZosDXHDwUJNglPF_jNQ" target="_blank" rel="noreferrer">Listen</a></div>
+                    </article>
+                </div>
+            </section>
+        </section>
+
+        <section id="tour">
+            <h2>Tour</h2>
+            <p class="muted" style="margin-top:6px">Upcoming shows — get tickets early.</p>
+            <ul class="tour-list" style="margin-top:12px">
+                <li class="tour-item">
+                    <div>
+                        <div style="font-weight:700">N/A</div>
+                        <div class="muted" style="font-size:15px">N/A</div>
+                    </div>
+                    <div><a href="#" class="cta">Tickets</a></div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="about">
+            <h3>Profile</h3>
+            <p class="muted" style="margin-top:8px;max-width:70ch" 
+            background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:16px;border-radius:14px;
+            border:5px solid rgba(255,255,255,0.03);
+            display:inline-block">
+               <b> Toxic O is a South African </b>trapper, songwriter, and music composer known for his unique
+                 blend of trap and hip-hop music. Rising to prominence in the mid-2020s, 
+                 Toxic O has captivated audiences with his introspective lyrics and innovative soundscapes. 
+                His music often explores themes of personal struggle, ambition,
+                 and societal issues, resonating deeply with a diverse fanbase. 
+                With several successful singles and albums under his belt,
+                 He continues to push the boundaries of contemporary music
+                  while maintaining a strong connection to his roots.
+        </section>
+
+        <section id="contact">
+            <div style="display:grid;grid-template-columns:1fr 320px;gap:18px">
+                <div>
+                    <h2>Contact</h2>
+                    <p class="muted">For bookings, press and collaborations — use the form or email directly at <a href="mailto:booking@example.com">booking@example.com</a></p>
+
+                    <form id="contactForm" onsubmit="submitContact(event)" style="margin-top:12px;display:grid;gap:8px">
+                        <input name="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff"/>
+                        <input name="email" type="email" placeholder="Email" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff"/>
+                        <textarea name="message" rows="4" placeholder="Message" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff"></textarea>
+                        <div style="display:flex;gap:8px">
+                            <button class="cta" type="submit">Send</button>
+                            <button class="btn" type="button" onclick="location.href='mailto:otengselekwe@gmail.com'">Email</button>
+                        </div>
+                        <div id="contactStatus" class="muted" style="font-size:13px"></div>
+                    </form>
+                </div>
+
+                <aside class="card">
+                    <h3 style="margin-top:0">Stay updated</h3>
+                    <p class="muted" style="margin-top:6px">Subscribe for release and ticket announcements.</p>
+                    <form id="subscribe" onsubmit="subscribe(event)" style="display:flex;gap:8px;margin-top:10px">
+                        <input id="subEmail" type="email" placeholder="Your email" required style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(16, 66, 204, 0.04);background:transparent;color:#fff"/>
+                        <button class="cta">Subscribe</button>
+                    </form>
+                    <div class="muted">Follow Toxic O</div>
+                    <div class="social-links" aria-label="Toxic O social links">
+                        <a class="social-link" href="https://open.spotify.com/search/Toxic%20O" target="_blank" rel="noreferrer" aria-label="Toxic O on Spotify" title="Spotify">
+                            <img src="https://cdn.simpleicons.org/spotify/ffffff" alt="Spotify" loading="lazy">
+                        </a>
+                        <a class="social-link" href="https://music.youtube.com/channel/UCuZ2ZosDXHDwUJNglPF_jNQ" target="_blank" rel="noreferrer" aria-label="Toxic O on YouTube Music" title="YouTube Music">
+                            <img src="https://cdn.simpleicons.org/youtube/ffffff" alt="YouTube" loading="lazy">
+                        </a>
+                        <a class="social-link" href="https://www.x.com/toxicselekwe" target="_blank" rel="noreferrer" aria-label="Toxic O on X" title="X">
+                            <img src="https://cdn.simpleicons.org/x/ffffff" alt="X" loading="lazy">
+                        </a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <footer> 
+            © <span id="year"></span> Toxicstudios— All rights reserved.
+        </footer>
+    </main>
+
+    <script>
+        // Load track metadata from JSON and keep the player state in sync.
+        const audio = document.getElementById('player-audio');
+        const playBtn = document.getElementById('playBtn');
+        const playerCard = document.getElementById('playerCard');
+        const playerTitle = document.getElementById('playerTitle');
+        const playerTime = document.getElementById('playerTime');
+        const playerProgress = document.getElementById('playerProgress');
+        function selectTrack(card){
+            audio.src = card.dataset.audio;
+            playerTitle.textContent = card.dataset.title;
+            playerTime.textContent = `${card.dataset.year} • ${card.dataset.duration}`;
+            document.querySelectorAll('.track-card').forEach(item => item.classList.toggle('is-playing', item === card));
+            audio.play().then(() => {
+                playBtn.textContent = 'Pause';
+                playerCard.classList.add('is-playing');
+            }).catch(() => {
+                playBtn.textContent = 'Play';
+                playerCard.classList.remove('is-playing');
+                card.classList.remove('is-playing');
+            });
+        }
+
+        function togglePlay(){
+            if(audio.paused){ audio.play(); playBtn.textContent='Pause'; }
+            else { audio.pause(); playBtn.textContent='Play'; }
+            playerCard.classList.toggle('is-playing', !audio.paused);
+        }
+        audio.addEventListener('timeupdate', () => {
+            playerProgress.style.width = audio.duration ? `${(audio.currentTime / audio.duration) * 100}%` : '0%';
+        });
+        audio.addEventListener('ended', ()=> {
+            playBtn.textContent='Play';
+            playerCard.classList.remove('is-playing');
+            playerProgress.style.width = '0%';
+        });
+
+        document.querySelectorAll('.track-card').forEach(card => {
+            card.querySelector('.track-play-btn').addEventListener('click', () => selectTrack(card));
+            card.querySelector('.favorite-btn').addEventListener('click', event => {
+                event.currentTarget.classList.toggle('is-favorite');
+                event.currentTarget.setAttribute('aria-pressed', event.currentTarget.classList.contains('is-favorite'));
+            });
+        });
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const revealItems = document.querySelectorAll('main > section, .track-card, .card');
+        revealItems.forEach((item, index) => {
+            item.classList.add('reveal');
+            item.style.setProperty('--index', index % 6);
+        });
+
+        if(prefersReducedMotion){
+            revealItems.forEach(item => item.classList.add('is-visible'));
+        } else {
+            const revealObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {threshold:0.12, rootMargin:'0px 0px -40px'});
+            revealItems.forEach(item => revealObserver.observe(item));
+        }
+
+        const sectionLinks = [...document.querySelectorAll('nav a[href^="#"]')].filter(link => link.getAttribute('href') !== '#subscribe');
+        const navigableSections = sectionLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    sectionLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+                }
+            });
+        }, {threshold:0.35});
+        navigableSections.forEach(section => sectionObserver.observe(section));
+
+        async function submitContact(e){
+            e.preventDefault();
+            const status = document.getElementById('contactStatus');
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            status.textContent = 'Sending...';
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(Object.fromEntries(new FormData(form)))
+                });
+                const result = await response.json();
+                if(!response.ok) throw new Error(result.error || 'Message could not be sent.');
+                status.textContent = result.message;
+                form.reset();
+            } catch(error) {
+                status.textContent = error.message;
+            } finally {
+                submitButton.disabled = false;
+            }
+        }
+
+        function subscribe(e){
+            e.preventDefault();
+            const email = document.getElementById('subEmail').value;
+            alert('Subscribed: ' + email + ' (demo)');
+            e.target.reset();
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
